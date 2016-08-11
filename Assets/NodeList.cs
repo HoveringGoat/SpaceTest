@@ -26,9 +26,9 @@ public class NodeList : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             float x, y, z;
-            x = Random.Range(-10.0f, 10.0f);
-            y = Random.Range(-10.0f, 10.0f);
-            z = Random.Range(-10.0f, 10.0f);
+            x = Random.Range(-5.0f, 5.0f);
+            y = Random.Range(-5.0f, 5.0f);
+            z = Random.Range(-5.0f, 5.0f);
             Nodes.Add(Instantiate(nodePrefab, new Vector3(x, y, z), Quaternion.identity));
         }
     }
