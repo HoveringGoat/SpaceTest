@@ -72,8 +72,10 @@ public class NodeList : MonoBehaviour {
         {
             redrawMesh = false;
             meshVert = new List<Vector3>();
-            int a = (int)Random.Range(0, Nodes.Count - 1);
-            Node child = Nodes[a].GetComponent<Node>() as Node;
+
+            //int a = (int)Random.Range(0, Nodes.Count - 1);
+            //Node child = Nodes[a].GetComponent<Node>() as Node;
+            Node child = Nodes[Nodes.Count-1].GetComponent<Node>() as Node;
             FindVertNode(child);
         }
 
@@ -110,10 +112,13 @@ public class NodeList : MonoBehaviour {
             a = hit.GetComponent<Node>();
             if(!a.Meshed)
             {
-                //not added yet.
-                Local.Add(a);
-                Vertices.Add(a.transform.position);
-                VertRef.Add(-1);
+                if (getNodes(a) < 8)//how many nodes does a non surface node connect to?????
+                {
+                    //not added yet.
+                    Local.Add(a);
+                    Vertices.Add(a.transform.position);
+                    VertRef.Add(-1);
+                }
             }
             //update normal vector 
             normal -= a.transform.position;
@@ -129,6 +134,7 @@ public class NodeList : MonoBehaviour {
                 {
                     //ref already exist update thingy to do stuff
                     VertRef[i] = j;
+                    Debug.Log("NEVER HITS????");
                 }
 
             }
@@ -157,5 +163,10 @@ public class NodeList : MonoBehaviour {
         }
 
 
+    }
+    private int getNodes(Node a)
+    {
+        Collider[] colliders = Physics.OverlapSphere(a.transform.position, a.radius * 1.1f);
+        return colliders.Length;
     }
 }
