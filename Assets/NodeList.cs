@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
-public class NodeList : MonoBehaviour {
+public class NodeList : MonoBehaviour
+{
 
     // Use this for initialization
     public GameObject nodePrefab;
@@ -12,11 +13,7 @@ public class NodeList : MonoBehaviour {
     //private Transform[] Nodes;
     public Vector3 CenterOfMass = Vector3.zero;
     public float Mass = 0;
-    public bool redrawMesh = false;
-    public List<Vector3> meshVert;
-    public List<int> meshTri;
-    private Mesh mesh;
-	void Start ()
+    void Start()
     {
         float x, y, z;
         GameObject a;
@@ -25,13 +22,13 @@ public class NodeList : MonoBehaviour {
         a.name = "Node" + Nodes.Count;
         a.transform.parent = gameObject.transform;
         Mass++;
-        //CenterOfMass += (a.transform.position - CenterOfMass) * (1 / (Mass));
         Nodes.Add(a);
-	    for (int i=1; i<numofnodes;i++)
+        
+        for (int i = 1; i < numofnodes; i++)
         {
-            x = Random.Range(-5.0f, 5.0f);
-            y = Random.Range(-5.0f, 5.0f);
-            z = Random.Range(-5.0f, 5.0f);
+            x = Random.Range(-9.0f, 9.0f);
+            y = Random.Range(-9.0f, 9.0f);
+            z = Random.Range(-9.0f, 9.0f);
             a = Instantiate(nodePrefab, new Vector3(x, y, z), Quaternion.identity) as GameObject;
             a.transform.parent = gameObject.transform;
             a.name = "Node" + Nodes.Count;
@@ -40,18 +37,19 @@ public class NodeList : MonoBehaviour {
             Nodes.Add(a);
 
         }
-	}
+    }
 
     void Update()
     {
 
         if (Input.GetMouseButtonDown(0))
         {
-            int num = 50;
+            int num = 5;
             float x, y, z;
             GameObject a;
             for (int i = 0; i < num; i++)
             {
+                Random.seed = i;
                 x = Random.Range(-5.0f, 5.0f);
                 y = Random.Range(-5.0f, 5.0f);
                 z = Random.Range(-5.0f, 5.0f);
@@ -60,14 +58,13 @@ public class NodeList : MonoBehaviour {
                 Mass++;
                 a.name = "Node" + Nodes.Count;
                 Nodes.Add(a);
-                redrawMesh = true;
 
             }
         }
         //calcmesh
         //uhhhhhh needs to like. go through and find the 'surface' of the nodes 
         //then, like, map those nodes to vertices. 
-
+        /*
         if(redrawMesh)
         {
             redrawMesh = false;
@@ -89,11 +86,12 @@ public class NodeList : MonoBehaviour {
         mesh.triangles = meshTri.ToArray();
         mesh.RecalculateNormals();
 
-        GetComponent<MeshCollider>().sharedMesh = mesh;
+        GetComponent<MeshCollider>().sharedMesh = mesh;*/
 
     }
+}
 
-    
+    /*
     private void FindVertNode(Node curr)
     {
         List<Vector3> Vertices = new List<Vector3>();
@@ -170,3 +168,4 @@ public class NodeList : MonoBehaviour {
         return colliders.Length;
     }
 }
+    */

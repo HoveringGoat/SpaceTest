@@ -265,12 +265,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePrefab: {fileID: 167730, guid: 911f2a1636a558746be1361b7b0512bf, type: 2}
-  numofnodes: 10
+  numofnodes: 20
   CenterOfMass: {x: 0, y: 0, z: 0}
   Mass: 0
-  redrawMesh: 0
-  meshVert: []
-  meshTri: 
 --- !u!4 &1854062298
 Transform:
   m_ObjectHideFlags: 0
